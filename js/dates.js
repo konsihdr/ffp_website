@@ -8,7 +8,7 @@ const apiUrl = 'https://ffp.hdr-it.de/api/nj';
             .then(response => response.json()) // Die Antwort als JSON interpretieren
             .then(data => {
                 // Zeitstempel in ein JavaScript Date-Objekt umwandeln
-                const startDatum = new Date(data.startDatum);
+                const startDatum = new Date(data.start);
                 
                 // Datum in lesbarer Form anzeigen
                 const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
