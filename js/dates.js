@@ -11,11 +11,11 @@ const apiUrl = 'https://ffp.hdr-it.de/api/nj';
                 const startDatum = new Date(data.start);
                 
                 // Datum in lesbarer Form anzeigen
-                const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+                const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZoneName: 'short' };
                 const formattedStartDatum = startDatum.toLocaleDateString('de-DE', options);
 
                 // Anzeige aktualisieren
-                startDatumElement.textContent = `Start Datum: ${formattedStartDatum}`;
+                startDatumElement.textContent = `${formattedStartDatum}`;
             })
             .catch(error => {
                 console.error('Fehler beim Abrufen der Daten:', error);
