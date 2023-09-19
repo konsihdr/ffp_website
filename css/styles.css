@@ -11053,6 +11053,34 @@ body {
   }
 }
 
+#secondNav {
+  min-height: 3.5rem;
+  background-color: #fff;
+}
+#secondNav .navbar-toggler {
+  font-size: 80%;
+  padding: 0.75rem;
+  color: #990000;
+  border: 1px solid #990000;
+}
+#secondNac .navbar-toggler:focus {
+  outline: none;
+}
+#secondNav .navbar-brand {
+  color: #000;
+  font-weight: 700;
+  padding: 0.9rem 0;
+}
+#secondNav .navbar-nav .nav-item:hover {
+  color: fade(#fff, 80%);
+  outline: none;
+  background-color: transparent;
+}
+#secondNav .navbar-nav .nav-item:active, #secondNav .navbar-nav .nav-item:focus {
+  outline: none;
+  background-color: transparent;
+}
+
 .btn {
   box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
   padding: 1.25rem 2rem;
