@@ -1,4 +1,4 @@
-const apiUrl = 'https://ffp-api-7qumc7rb4q-ey.a.run.app/api/nj';
+const apiUrl = 'https://ffp.hdr-it.de/api/nj';
 
 // Element auswählen, in dem das Start Datum angezeigt wird
 const startDatumElement = document.getElementById('startDatum');
