@@ -30,12 +30,10 @@ function formatDayName(isoDate) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const dataTableBody = document.querySelector('#dataTable tbody');
-    const callCountInput = document.getElementById('callCount');
 
     // Funktion zum Abrufen der Daten
     function fetchData() {
-        const callCount = callCountInput.value;
-        const apiUrl = `https://ffp.hdr-it.de/api/ne?c=${callCount}`;
+        const apiUrl = `https://ffp.hdr-it.de/api/ne?c=12`;
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -57,9 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Fehler beim Abrufen der Daten:', error);
             });
     }
-
-    // Event-Listener für Änderungen im Input-Element
-    callCountInput.addEventListener('input', fetchData);
 
     // Initial die Daten laden, wenn die Seite geladen ist
     fetchData();
