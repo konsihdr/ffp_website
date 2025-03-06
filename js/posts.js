@@ -26,25 +26,20 @@ document.addEventListener("DOMContentLoaded", () => {
             "align-items-center"
           );
           div.innerHTML = `
-                                <div class="col-xl-8 col-lg-7">
-                                    <img
-                                    class="img-fluid mb-3 mb-lg-0"
-                                    src="${item.displayUrl}"
-                                    alt="${item.alt}"
-                                    />
-                                </div>
-                                <div class="col-xl-4 col-lg-5">
-                                    <div class="featured-text text-lg-left">
-                                    <h4>${item.caption.split(" ")[1]}</h4>
-                                    <p class="small">${formatISODate(
-                                      item.timestamp
-                                    )}</p>
-                                    <p class="mb-0">${item.caption}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                    `;
+            <div class="col-xl-8 col-lg-7">
+                <img
+                class="img-fluid mb-3 mb-lg-0"
+                src="${item.displayUrl}"
+                alt="${item.alt}"
+                />
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="featured-text text-lg-left">
+                <a href="${item.url}"><h4>${item.caption.split(" ")[1]}</h4></a>
+                <p class="small">${formatISODate(item.timestamp)}</p>
+                <p class="mb-0">${item.caption}</p>
+                </div>
+            </div>`;
           posts.appendChild(div);
         });
       })
