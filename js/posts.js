@@ -23,12 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
             "gx-0",
             "mb-4",
             "mb-lg-5",
-            "align-items-center"
+            "align-items-center",
+            "border",
+            "border-primary"
           );
           div.innerHTML = `
             <div class="col-xl-8 col-lg-7">
                 <img
-                class="img-fluid mb-3 mb-lg-0"
+                class="img-fluid mb-3 mb-lg-0 w-100 h-50"
                 src="${item.displayUrl}"
                 alt="${item.alt}"
                 />
