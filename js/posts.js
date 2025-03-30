@@ -116,6 +116,16 @@ document.addEventListener("DOMContentLoaded", () => {
             ? item.caption.split(" ")[1]
             : "Untitled Post";
           const formattedDate = formatISODate(item.timestamp);
+          const words = fullCaption.split(" ");
+          let truncatedCaption = words.slice(0, 50).join(" ");
+          let readMoreLink = "";
+
+          if (words.length > 50) {
+            readMoreLink = `<a href="#" class="read-more" data-full-caption="${encodeURIComponent(
+              fullCaption
+            )}">Read More</a>`;
+            truncatedCaption += "... ";
+          }
 
           // 3. Construct card inner HTML
           cardDiv.innerHTML = `
@@ -132,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
             postUrl !== "#" ? 'target="_blank" rel="noopener noreferrer"' : ""
           }>${potentialTitle}</a>
               </h5>
-              <p class="card-text mb-auto">${fullCaption}</p>
+              <p class="card-text mb-auto">${truncatedCaption}${readMoreLink}</p>
             </div>
             ${
               formattedDate
@@ -147,6 +157,18 @@ document.addEventListener("DOMContentLoaded", () => {
           const cardImage = cardDiv.querySelector(".card-img-top");
           cardImage.addEventListener("click", () => {
             window.open(cardImage.src, "_blank");
+          });
+
+          // 3.2 Add click event to read more link
+          document.addEventListener("click", (event) => {
+            if (event.target.classList.contains("read-more")) {
+              event.preventDefault(); // Prevent default link behavior
+              const fullCaption = decodeURIComponent(
+                event.target.dataset.fullCaption
+              );
+              const captionParagraph = event.target.parentElement;
+              captionParagraph.textContent = fullCaption; // Replace truncated caption
+            }
           });
 
           // 4. Append card to column, column to container
