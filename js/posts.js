@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (words.length > 50) {
             readMoreLink = `<a href="#" class="read-more" data-full-caption="${encodeURIComponent(
               fullCaption
-            )}">Read More</a>`;
+            )}">Weiterlesen</a>`;
             truncatedCaption += "... ";
           }
 
