@@ -136,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
               style="object-fit: cover; height: 300px; width: 100%;"
               onerror="this.onerror=null; this.src='path/to/your/placeholder-image.jpg';"
             />
+            <hr class="my-4 mx-auto" />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">
                 <a href="${postUrl}" ${
