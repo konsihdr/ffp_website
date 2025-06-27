@@ -1,5 +1,5 @@
 function nextJugend() {
-  const apiUrl = "https://ffp.hdr-it.de/api/nj";
+  const apiUrl = "https://base.hdr-it.de/api/collections/ffp_events/records?filter=(is_youth_event=true)&filter=(start>=@now)&sort=start&perPage=1";
 
   // Element auswählen, in dem das Start Datum angezeigt wird
   const startDatumElement = document.getElementById("nj");
@@ -8,8 +8,15 @@ function nextJugend() {
   fetch(apiUrl)
     .then((response) => response.json()) // Die Antwort als JSON interpretieren
     .then((data) => {
+      // PocketBase returns data in a 'items' array
+      const events = data.items || [];
+      if (events.length === 0) {
+        startDatumElement.textContent = "Keine anstehenden Jugendveranstaltungen";
+        return;
+      }
+      
       // Zeitstempel in ein JavaScript Date-Objekt umwandeln
-      const startDatum = new Date(data.start);
+      const startDatum = new Date(events[0].start);
 
       // Datum in lesbarer Form anzeigen
       const options = {
@@ -35,7 +42,7 @@ function nextJugend() {
 nextJugend();
 
 function next() {
-  const apiUrl = "https://ffp.hdr-it.de/api/ne";
+  const apiUrl = "https://base.hdr-it.de/api/collections/ffp_events/records?filter=(start>=@now)&sort=start&perPage=1";
 
   // Element auswählen, in dem das Start Datum angezeigt wird
   const startDatumElement = document.getElementById("ne");
@@ -44,8 +51,15 @@ function next() {
   fetch(apiUrl)
     .then((response) => response.json()) // Die Antwort als JSON interpretieren
     .then((data) => {
+      // PocketBase returns data in a 'items' array
+      const events = data.items || [];
+      if (events.length === 0) {
+        startDatumElement.textContent = "Keine anstehenden Veranstaltungen";
+        return;
+      }
+      
       // Zeitstempel in ein JavaScript Date-Objekt umwandeln
-      const startDatum = new Date(data.start);
+      const startDatum = new Date(events[0].start);
 
       // Datum in lesbarer Form anzeigen
       const options = {
@@ -61,7 +75,7 @@ function next() {
       );
 
       // Anzeige aktualisieren
-      startDatumElement.textContent = `${data.summary} am ${formattedStartDatum}`;
+      startDatumElement.textContent = `${events[0].summary} am ${formattedStartDatum}`;
     })
     .catch((error) => {
       console.error("Fehler beim Abrufen der Daten:", error);

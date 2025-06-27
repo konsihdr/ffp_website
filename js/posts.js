@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
    * Fetches posts from the API and renders them as cards in the postsContainer.
    */
   function fetchPosts() {
-    const apiUrl = `https://ffp.hdr-it.de/api/posts/all`;
+    const apiUrl = `https://base.hdr-it.de/api/collections/ffp_posts/records?sort=-postDate&perPage=12`;
 
     // Indicate loading state (optional)
     // postsContainer.innerHTML = '<div class="col-12 text-center"><p>Loading posts...</p></div>';
@@ -74,23 +74,18 @@ document.addEventListener("DOMContentLoaded", () => {
         // Clear existing posts/loading indicator
         postsContainer.innerHTML = "";
 
-        // Check if the received data is an array
-        if (!Array.isArray(data)) {
-          console.error("Error: Fetched data is not an array.", data);
-          postsContainer.innerHTML =
-            "<div class='col-12'><p class='text-warning'>Could not load posts (invalid data format).</p></div>";
-          return;
-        }
+        // PocketBase returns data in a 'items' array
+        const posts = data.items || [];
 
         // Check if there are any posts
-        if (data.length === 0) {
+        if (posts.length === 0) {
           postsContainer.innerHTML =
             "<div class='col-12'><p>No posts found.</p></div>";
           return;
         }
 
         // Iterate and create cards
-        data.forEach((item) => {
+        posts.forEach((item) => {
           // 1. Create column wrapper div
           const columnDiv = document.createElement("div");
           // These classes ensure 3 cards/row (lg), 2 (md), 1 (sm/xs)
@@ -115,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const potentialTitle = item.caption
             ? item.caption.split(" ")[1]
             : "Untitled Post";
-          const formattedDate = formatISODate(item.timestamp);
+          const formattedDate = formatISODate(item.postDate);
           const words = fullCaption.split(" ");
           let truncatedCaption = words.slice(0, 50).join(" ");
           let readMoreLink = "";
