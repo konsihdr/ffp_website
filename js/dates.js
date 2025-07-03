@@ -1,5 +1,5 @@
 function nextJugend() {
-  const apiUrl = "https://base.hdr-it.de/api/collections/ffp_events/records?filter=(is_youth_event=true)&filter=(start>=@now)&sort=start&perPage=1";
+  const apiUrl = "https://base.hdr-it.de/api/collections/ffp_events/records?filter=(is_youth_event%3Dtrue%20%26%26%20start%3E%3D%40now)&sort=start&perPage=1";
 
   // Element auswählen, in dem das Start Datum angezeigt wird
   const startDatumElement = document.getElementById("nj");
