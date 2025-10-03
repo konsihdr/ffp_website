@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Determine media type and URL
           const isVideo = item.video && item.video.length > 0;
-          const mediaUrl = item.displayUrl || "path/to/your/placeholder-image.jpg";
+          const mediaUrl = item.displayUrl || "assets/img/placeholder.png";
           const imageAlt = item.alt || "Post media";
           const postUrl = item.url || "#";
           const fullCaption = item.caption || "No caption available.";
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 class="card-img-top"
                 alt="${imageAlt}"
                 style="object-fit: cover; height: 300px; width: 100%; cursor: pointer;"
-                onerror="this.onerror=null; this.src='path/to/your/placeholder-image.jpg';"
+                onerror="this.onerror=null; this.src='assets/img/placeholder.png';"
               />
             `;
           }
