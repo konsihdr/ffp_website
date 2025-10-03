@@ -4,28 +4,80 @@
  * @returns {string} The formatted date string (e.g., "27. Oktober 2023") or an empty string if input is invalid.
  */
 function formatISODate(isoDate) {
-  // Using current date for demonstration as requested by user prompt context
-  // In a real scenario, you'd parse isoDate
-  const today = new Date(); // Example: Use today's date based on prompt context
   if (!isoDate) {
-    // If no date provided, maybe show today's date as per context, or return ''
-    // Let's stick to formatting the input if provided, else empty
     return "";
   }
 
   try {
     const date = new Date(isoDate);
-    // Get current location from context if needed for locale, but de-DE is specified
     return date.toLocaleDateString("de-DE", {
-      // Using specified German locale
       year: "numeric",
-      month: "long", // e.g., "März"
-      day: "numeric", // e.g., "30"
+      month: "long",
+      day: "numeric",
     });
   } catch (e) {
     console.error("Error formatting date:", isoDate, e);
-    return isoDate; // Return original string if formatting fails
+    return isoDate;
   }
+}
+
+/**
+ * Creates and shows a lightbox modal for images and videos
+ * @param {string} mediaUrl - The URL of the media to display
+ * @param {string} mediaType - Either 'image' or 'video'
+ * @param {string} caption - The caption/description
+ */
+function showLightbox(mediaUrl, mediaType, caption) {
+  // Remove existing lightbox if any
+  const existingLightbox = document.getElementById('media-lightbox');
+  if (existingLightbox) {
+    existingLightbox.remove();
+  }
+
+  // Create lightbox container
+  const lightbox = document.createElement('div');
+  lightbox.id = 'media-lightbox';
+  lightbox.className = 'media-lightbox';
+
+  let mediaElement;
+  if (mediaType === 'video') {
+    mediaElement = `
+      <video controls autoplay class="lightbox-media">
+        <source src="${mediaUrl}" type="video/mp4">
+        Ihr Browser unterstützt das Video-Tag nicht.
+      </video>
+    `;
+  } else {
+    mediaElement = `<img src="${mediaUrl}" class="lightbox-media" alt="Post media">`;
+  }
+
+  lightbox.innerHTML = `
+    <div class="lightbox-content">
+      <span class="lightbox-close">&times;</span>
+      ${mediaElement}
+      ${caption ? `<p class="lightbox-caption">${caption}</p>` : ''}
+    </div>
+  `;
+
+  document.body.appendChild(lightbox);
+
+  // Close handlers
+  const closeBtn = lightbox.querySelector('.lightbox-close');
+  closeBtn.onclick = () => lightbox.remove();
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) {
+      lightbox.remove();
+    }
+  };
+
+  // ESC key to close
+  const escHandler = (e) => {
+    if (e.key === 'Escape') {
+      lightbox.remove();
+      document.removeEventListener('keydown', escHandler);
+    }
+  };
+  document.addEventListener('keydown', escHandler);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -88,23 +140,22 @@ document.addEventListener("DOMContentLoaded", () => {
         posts.forEach((item) => {
           // 1. Create column wrapper div
           const columnDiv = document.createElement("div");
-          // These classes ensure 3 cards/row (lg), 2 (md), 1 (sm/xs)
           columnDiv.classList.add(
             "col-lg-4",
             "col-md-6",
             "mb-4",
             "justify-content-center",
             "align-items-center"
-          ); // <--- This defines the grid behavior
+          );
 
           // 2. Create the main card element
           const cardDiv = document.createElement("div");
           cardDiv.classList.add("card", "h-150");
 
-          // Prepare data with fallbacks
-          const imageUrl =
-            item.displayUrl || "path/to/your/placeholder-image.jpg";
-          const imageAlt = item.alt || "Post image";
+          // Determine media type and URL
+          const isVideo = item.video && item.video.length > 0;
+          const mediaUrl = item.displayUrl || "path/to/your/placeholder-image.jpg";
+          const imageAlt = item.alt || "Post media";
           const postUrl = item.url || "#";
           const fullCaption = item.caption || "No caption available.";
           const potentialTitle = item.caption
@@ -122,15 +173,40 @@ document.addEventListener("DOMContentLoaded", () => {
             truncatedCaption += "... ";
           }
 
-          // 3. Construct card inner HTML
+          // 3. Construct card inner HTML with proper media element
+          let mediaElement;
+          if (isVideo) {
+            mediaElement = `
+              <div class="card-media-wrapper" style="position: relative; cursor: pointer;">
+                <video
+                  class="card-img-top"
+                  style="object-fit: cover; height: 300px; width: 100%;"
+                  muted
+                  loop
+                  playsinline
+                >
+                  <source src="${mediaUrl}" type="video/mp4">
+                  Ihr Browser unterstützt das Video-Tag nicht.
+                </video>
+                <div class="play-overlay">
+                  <i class="fas fa-play-circle fa-3x"></i>
+                </div>
+              </div>
+            `;
+          } else {
+            mediaElement = `
+              <img
+                src="${mediaUrl}"
+                class="card-img-top"
+                alt="${imageAlt}"
+                style="object-fit: cover; height: 300px; width: 100%; cursor: pointer;"
+                onerror="this.onerror=null; this.src='path/to/your/placeholder-image.jpg';"
+              />
+            `;
+          }
+
           cardDiv.innerHTML = `
-            <img
-              src="${imageUrl}"
-              class="card-img-top"
-              alt="${imageAlt}"
-              style="object-fit: cover; height: 300px; width: 100%;"
-              onerror="this.onerror=null; this.src='path/to/your/placeholder-image.jpg';"
-            />
+            ${mediaElement}
             <hr class="my-4 mx-auto" />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">
@@ -149,23 +225,37 @@ document.addEventListener("DOMContentLoaded", () => {
                 : ""
             }
           `;
-          // 3.1 Add click event to open post URL in new tab
-          const cardImage = cardDiv.querySelector(".card-img-top");
-          cardImage.addEventListener("click", () => {
-            window.open(cardImage.src, "_blank");
+
+          // 3.1 Add click event to open lightbox
+          const mediaContainer = cardDiv.querySelector(isVideo ? '.card-media-wrapper' : '.card-img-top');
+          mediaContainer.addEventListener("click", () => {
+            showLightbox(mediaUrl, isVideo ? 'video' : 'image', fullCaption);
           });
 
-          // 3.2 Add click event to read more link
-          document.addEventListener("click", (event) => {
-            if (event.target.classList.contains("read-more")) {
-              event.preventDefault(); // Prevent default link behavior
+          // 3.2 Hover effect for video preview
+          if (isVideo) {
+            const video = cardDiv.querySelector('video');
+            mediaContainer.addEventListener('mouseenter', () => {
+              video.play();
+            });
+            mediaContainer.addEventListener('mouseleave', () => {
+              video.pause();
+              video.currentTime = 0;
+            });
+          }
+
+          // 3.3 Add click event to read more link
+          const readMoreBtn = cardDiv.querySelector('.read-more');
+          if (readMoreBtn) {
+            readMoreBtn.addEventListener("click", (event) => {
+              event.preventDefault();
               const fullCaption = decodeURIComponent(
                 event.target.dataset.fullCaption
               );
               const captionParagraph = event.target.parentElement;
-              captionParagraph.textContent = fullCaption; // Replace truncated caption
-            }
-          });
+              captionParagraph.textContent = fullCaption;
+            });
+          }
 
           // 4. Append card to column, column to container
           columnDiv.appendChild(cardDiv);
