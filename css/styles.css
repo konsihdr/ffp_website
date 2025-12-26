@@ -11749,7 +11749,7 @@ body {
       rgba(0, 0, 0, 0.7) 75%,
       #000 100%
     ),
-    url("../assets/img/burningbeatz.jpg");
+    url("/assets/img/burningbeatz.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
