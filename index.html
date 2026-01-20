@@ -45,6 +45,54 @@
                 </div>
             </div>
         </header>
+        <!-- Next Events -->
+        <section class="contact-section bg-black p-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card pb-4 h-100">
+                        <div class="card-media-wrapper" style="position: relative; cursor: pointer; overflow: hidden; height: 250px;">
+                            <img class="card-img-top" src="assets/150/150jahre.png" alt="150 Jahre FF Pöttmes" style="object-fit: cover; height: 100%; width: 100%;" onclick="showLightbox('assets/150/150jahre.png', 'image', '150 Jahre FF Pöttmes')">
+                        </div>
+                    <div class="card-body text-center">
+                        <i class="fas fa-calendar-days text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">150 Jahre Pöttmes</h4>
+                        <hr class="my-4 mx-auto" />
+                        <div class="small">Text für die 150 Jahr feier hier</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card pb-4 h-100">
+                        <div class="card-media-wrapper" style="position: relative; cursor: pointer; overflow: hidden; height: 250px;">
+                            <img class="card-img-top" src="assets/img/burningbeatz.jpg" alt="Burning Beatz" style="object-fit: cover; height: 100%; width: 100%;" onclick="showLightbox('assets/img/burningbeatz.jpg', 'image', 'Burning Beatz Pöttmes')">
+                        </div>
+                    <div class="card-body text-center">
+                        <i class="fas fa-music text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Burning Beatz Pöttmes</h4>
+                        <hr class="my-4 mx-auto" />
+                        <div class="small text-muted mb-2">Countdown bis zum Event:</div>
+                        <div class="small fw-bold" id="bb-countdown">00:00:00:00</div>
+                        <div class="small text-muted" style="font-size: 0.7rem;">Tage : Stunden : Minuten : Sekunden</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card pb-4 h-100">
+                        <div class="card-media-wrapper" style="position: relative; cursor: pointer; overflow: hidden; height: 250px;">
+                            <img class="card-img-top" src="assets/150/qr.png" alt="QR Code 150 Jahre Pöttmes" style="object-fit: contain; height: 100%; width: 100%;" onclick="showLightbox('assets/150/qr.png', 'image', 'QR Code - 150 Jahre FF Pöttmes')">
+                        </div>
+                    <div class="card-body text-center">
+                        <i class="fas fa-ticket text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Tickets</h4>
+                        <hr class="my-4 mx-auto" />
+                        <div class="small">Du willst dabei sein, das sei schnell und hole dir hier die Tickets!</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
         <!-- About-->
         <section class="about-section text-center" id="about">
             <div class="container px-4 px-lg-5">
@@ -206,5 +254,61 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
         <script src="js/dates.js"></script>
+
+        <!-- Lightbox Script -->
+        <script>
+            function showLightbox(mediaUrl, mediaType, caption) {
+                // Remove existing lightbox if any
+                const existingLightbox = document.getElementById('media-lightbox');
+                if (existingLightbox) {
+                    existingLightbox.remove();
+                }
+
+                // Create lightbox container
+                const lightbox = document.createElement('div');
+                lightbox.id = 'media-lightbox';
+                lightbox.className = 'media-lightbox';
+
+                let mediaElement;
+                if (mediaType === 'video') {
+                    mediaElement = `
+                        <video controls autoplay class="lightbox-media">
+                            <source src="${mediaUrl}" type="video/mp4">
+                            Ihr Browser unterstützt das Video-Tag nicht.
+                        </video>
+                    `;
+                } else {
+                    mediaElement = `<img src="${mediaUrl}" class="lightbox-media" alt="Media">`;
+                }
+
+                lightbox.innerHTML = `
+                    <div class="lightbox-content">
+                        <span class="lightbox-close">&times;</span>
+                        ${mediaElement}
+                        ${caption ? `<p class="lightbox-caption">${caption}</p>` : ''}
+                    </div>
+                `;
+
+                document.body.appendChild(lightbox);
+
+                // Close handlers
+                const closeBtn = lightbox.querySelector('.lightbox-close');
+                closeBtn.onclick = () => lightbox.remove();
+                lightbox.onclick = (e) => {
+                    if (e.target === lightbox) {
+                        lightbox.remove();
+                    }
+                };
+
+                // ESC key to close
+                const escHandler = (e) => {
+                    if (e.key === 'Escape') {
+                        lightbox.remove();
+                        document.removeEventListener('keydown', escHandler);
+                    }
+                };
+                document.addEventListener('keydown', escHandler);
+            }
+        </script>
     </body>
 </html>
