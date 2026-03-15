@@ -1,71 +1,122 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="description" content="" />
-        <meta name="author" content="Konstantin Hoerder" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>Burning Beats FFP</title>
-        <!-- Analytics -->
-        <script defer data-domain="feuerwehr-poettmes.de" src="https://analytics.hdr-it.de/js/script.js"></script>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="/css/styles.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/">Feuerwehr Pöttmes</a>
-            </div>
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead_bb">
-            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-                <div class="d-flex justify-content-center">
-                    <div class="text-center">
-                        <p class="countdown-label mb-2">days : hours : minutes : seconds</p>
-                        <h1 class="mx-auto my-0 text-uppercase">00:00:00:00</h1>
-                    </div>
-                </div>
-            </div>
-        </header>
-        
-        <!-- Footer-->
-        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Made with ❤️ by <a href="https://hdr-it.de">hdr-it.de</a> 2023 | With the help of <a href="https://startbootstrap.com/theme/grayscale">Grayscale</a></div></footer>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Burning Beatz Party der Feuerwehr Poettmes" />
+    <meta name="author" content="Konstantin Hoerder" />
+    <title>Burning Beatz | Feuerwehr Poettmes</title>
+    <script
+      defer
+      data-domain="feuerwehr-poettmes.de"
+      src="https://analytics.hdr-it.de/js/script.js"
+    ></script>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
 
+  </head>
+  <body>
+    <main class="app" id="home">
+      <header class="topbar glass">
+        <div class="brand">
+          <div class="brand-mark">BB</div>
+          <div>
+            <strong>Burning Beatz</strong>
+            <span>Party der FF Poettmes</span>
+          </div>
+        </div>
+        <a class="chip" href="/">Start</a>
+      </header>
 
-        <!-- Countdown Script -->
-        <script>
-            function updateCountdown() {
-                const targetDate = new Date('2026-06-03T00:00:00').getTime();
-                const now = new Date().getTime();
-                const distance = targetDate - now;
+      <section class="hero">
+        <img src="../assets/img/burningbeatz.jpg" alt="Burning Beatz" />
+        <div class="overlay"></div>
+        <div class="hero-content">
+          <p class="kicker">Sommerparty</p>
+          <h1>Burning Beatz 2026</h1>
+          <p>Beats, Licht und Feuerwehr-Community. Sei dabei, wenn Poettmes feiert.</p>
+        </div>
+      </section>
 
-                if (distance < 0) {
-                    document.querySelector('.masthead_bb h1').textContent = '00:00:00:00';
-                    return;
-                }
+      <section class="section">
+        <h2>Countdown</h2>
+        <div class="countdown-box">
+          <div class="countdown-value" id="bb-countdown">00:00:00:00</div>
+          <div class="countdown-hint">Tage : Stunden : Minuten : Sekunden</div>
+        </div>
+      </section>
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      <section class="section">
+        <h2>Event-Infos</h2>
+        <div class="meta-grid">
+          <article class="meta-item">
+            <strong>Datum</strong>
+            <span>03. Juni 2026</span>
+          </article>
+          <article class="meta-item">
+            <strong>Ort</strong>
+            <span>Festplatz Poettmes</span>
+          </article>
+          <article class="meta-item">
+            <strong>Einlass</strong>
+            <span>19:00 Uhr</span>
+          </article>
+          <article class="meta-item">
+            <strong>Kontakt</strong>
+            <a href="mailto:info@feuerwehr-poettmes.de">info@feuerwehr-poettmes.de</a>
+          </article>
+        </div>
+      </section>
 
-                const formattedCountdown =
-                    String(days).padStart(2, '0') + ':' +
-                    String(hours).padStart(2, '0') + ':' +
-                    String(minutes).padStart(2, '0') + ':' +
-                    String(seconds).padStart(2, '0');
+      <section class="section">
+        <h2>Highlights</h2>
+        <div class="meta-grid">
+          <article class="meta-item">
+            <strong>Live DJ</strong>
+            <span>Elektronische Beats bis spaet in die Nacht.</span>
+          </article>
+          <article class="meta-item">
+            <strong>Bar & Food</strong>
+            <span>Drinks, Snacks und Grillstation.</span>
+          </article>
+          <article class="meta-item">
+            <strong>Lightshow</strong>
+            <span>Festival-Look mit Feuerwehr-Flair.</span>
+          </article>
+          <article class="meta-item">
+            <strong>Community</strong>
+            <span>Treffpunkt fuer Freunde, Mitglieder und Gaeste.</span>
+          </article>
+        </div>
+      </section>
 
-                document.querySelector('.masthead_bb h1').textContent = formattedCountdown;
-            }
+      <section class="section ticket" id="tickets">
+        <img src="../assets/150/qr.png" alt="Tickets" />
+        <div>
+          <h3 class="section-title">Tickets</h3>
+          <div class="ticket-copy">
+            Jetzt Tickets fuer die Burning Beatz Party sichern.
+          </div>
+          <a class="action" href="https://pretix.eu/ffwpoe/150Jahre" target="_blank" rel="noopener noreferrer">Zum Ticketshop</a>
+        </div>
+      </section>
 
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        </script>
-    </body>
+      <p class="meta">Feuerwehr Poettmes | Burning Beatz</p>
+    </main>
+
+    <nav class="tabbar" aria-label="Mobile Navigation">
+      <a href="/">Start</a>
+      <a href="/aktuelles/">Aktuelles</a>
+      <a href="/150j/">150 Jahre</a>
+      <a href="/impressum/">Impressum</a>
+    </nav>
+
+    <script src="../js/dates.js"></script>
+  </body>
 </html>
