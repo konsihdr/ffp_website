@@ -30,7 +30,7 @@
 
     card.innerHTML = `
       ${isVideo
-        ? `<video class="post-media" controls preload="metadata"><source src="${mediaUrl}" type="video/mp4"></video>`
+        ? `<video class="post-media" preload="metadata" muted playsinline><source src="${mediaUrl}" type="video/mp4"></video>`
         : `<img class="post-media" src="${mediaUrl}" alt="Post" loading="lazy">`}
       <div class="post-body">
         <h3 class="post-title">${postUrl ? `<a href="${postUrl}" target="_blank" rel="noopener noreferrer">${titleText}</a>` : titleText}</h3>
@@ -41,7 +41,10 @@
 
     const mediaEl = card.querySelector('.post-media');
     if (mediaEl) {
-      mediaEl.addEventListener('click', () => {
+      mediaEl.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        pauseInlineVideos();
         showLightbox(mediaUrl, isVideo ? 'video' : 'image', fullCaption);
       });
     }
@@ -49,9 +52,23 @@
     return card;
   }
 
+  function pauseInlineVideos() {
+    document.querySelectorAll('#posts video.post-media').forEach((video) => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  }
+
   function showLightbox(mediaUrl, mediaType, caption) {
     const existing = document.getElementById('media-lightbox');
-    if (existing) existing.remove();
+    if (existing) {
+      const existingVideo = existing.querySelector('video');
+      if (existingVideo) {
+        existingVideo.pause();
+        existingVideo.currentTime = 0;
+      }
+      existing.remove();
+    }
 
     const lightbox = document.createElement('div');
     lightbox.id = 'media-lightbox';
@@ -71,16 +88,25 @@
 
     document.body.appendChild(lightbox);
 
+    const closeLightbox = () => {
+      const lightboxVideo = lightbox.querySelector('video');
+      if (lightboxVideo) {
+        lightboxVideo.pause();
+        lightboxVideo.currentTime = 0;
+      }
+      document.removeEventListener('keydown', escHandler);
+      lightbox.remove();
+    };
+
     const closeBtn = lightbox.querySelector('.lightbox-close');
-    closeBtn.onclick = () => lightbox.remove();
+    closeBtn.onclick = closeLightbox;
     lightbox.onclick = (e) => {
-      if (e.target === lightbox) lightbox.remove();
+      if (e.target === lightbox) closeLightbox();
     };
 
     const escHandler = (e) => {
       if (e.key === 'Escape') {
-        lightbox.remove();
-        document.removeEventListener('keydown', escHandler);
+        closeLightbox();
       }
     };
     document.addEventListener('keydown', escHandler);
