@@ -30,7 +30,7 @@
 
     card.innerHTML = `
       ${isVideo
-        ? `<video class="post-media" preload="metadata" muted playsinline><source src="${mediaUrl}" type="video/mp4"></video>`
+        ? `<video class="post-media" preload="auto" muted playsinline webkit-playsinline><source src="${mediaUrl}" type="video/mp4"></video>`
         : `<img class="post-media" src="${mediaUrl}" alt="Post" loading="lazy">`}
       <div class="post-body">
         <h3 class="post-title">${postUrl ? `<a href="${postUrl}" target="_blank" rel="noopener noreferrer">${titleText}</a>` : titleText}</h3>
@@ -47,6 +47,16 @@
         pauseInlineVideos();
         showLightbox(mediaUrl, isVideo ? 'video' : 'image', fullCaption);
       });
+    }
+
+    if (isVideo) {
+      const inlineVideo = card.querySelector('video.post-media');
+      if (inlineVideo) {
+        // Force preload on mobile so the card has media content without prior user interaction.
+        inlineVideo.muted = true;
+        inlineVideo.playsInline = true;
+        inlineVideo.load();
+      }
     }
 
     return card;
