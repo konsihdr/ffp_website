@@ -83,3 +83,36 @@ function next() {
     });
 }
 next();
+
+function updateBBCountdown() {
+  const targetDate = new Date('2026-06-03T00:00:00').getTime();
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  const countdownElement = document.getElementById('bb-countdown');
+  if (!countdownElement) return;
+
+  if (distance < 0) {
+    countdownElement.textContent = '00:00:00:00';
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  const formattedCountdown =
+    String(days).padStart(2, '0') + ':' +
+    String(hours).padStart(2, '0') + ':' +
+    String(minutes).padStart(2, '0') + ':' +
+    String(seconds).padStart(2, '0');
+
+  countdownElement.textContent = formattedCountdown;
+}
+
+// Only run countdown if element exists
+if (document.getElementById('bb-countdown')) {
+  updateBBCountdown();
+  setInterval(updateBBCountdown, 1000);
+}

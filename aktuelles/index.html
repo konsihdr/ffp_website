@@ -2,165 +2,118 @@
 <html lang="de">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Aktuelles der Freiwilligen Feuerwehr Poettmes" />
     <meta name="author" content="Konstantin Hoerder" />
-    <title>Freiwillige Feuerwehr Pöttmes</title>
-    <!-- Analytics -->
-    <script defer data-domain="feuerwehr-poettmes.de" src="https://analytics.hdr-it.de/js/script.js"></script>
+    <title>Aktuelles | Feuerwehr Poettmes</title>
+    <script
+      defer
+      data-domain="feuerwehr-poettmes.de"
+      src="https://analytics.hdr-it.de/js/script.js"
+    ></script>
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
-    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css?family=Varela+Round"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-      rel="stylesheet"
-    />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css" />
+
   </head>
-  <body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="/">Feuerwehr Pöttmes</a>
-        <button
-          class="navbar-toggler navbar-toggler-right"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 448 512" fill="currentColor"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#posts">Einsätze</a>
-            </li>
-          </ul>
+  <body>
+    <main class="app" id="home">
+      <header class="topbar glass">
+        <div class="brand">
+          <div class="brand-mark">FFP</div>
+          <div>
+            <strong>Aktuelles</strong>
+            <span>News & Einsätze</span>
+          </div>
         </div>
-      </div>
+        <a class="chip" href="/">Start</a>
+      </header>
+
+      <section class="hero">
+        <img src="../assets/img/hlf.jpg" alt="Feuerwehr Poettmes" />
+        <div class="overlay"></div>
+        <div class="hero-content">
+          <p class="kicker">Wir für Pöttmes</p>
+          <h1>Aktuelles aus Einsatzdienst und Vereinsleben</h1>
+          <p>Hier finden Sie aktuelle Beiträge, Einsatzberichte und Termine der Freiwilligen Feuerwehr Pöttmes.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Nächste Termine</h2>
+        <div class="meta-grid">
+          <article class="meta-item">
+            <strong>Nächste Übung</strong>
+            <span id="ne">Wird geladen ...</span>
+          </article>
+          <article class="meta-item">
+            <strong>Nächste Jugendübung</strong>
+            <span id="nj">Wird geladen ...</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="posts-section">
+        <h2>Aktuelle Beiträge</h2>
+        <div class="posts" id="posts"></div>
+      </section>
+
+      <section class="section">
+        <h2>Social Media</h2>
+        <div class="meta-grid">
+          <article class="meta-item">
+            <strong>Hastag</strong>
+            <a href="https://www.instagram.com/explore/tags/wirfuerpoettmes/">#WirFürPoettmes</a>
+          </article>
+          <article class="meta-item">
+            <strong>Instagram</strong>
+            <a href="https://www.instagram.com/feuerwehrpoettmes/">@feuerwehrpoettmes</a>
+          </article>
+          <article class="meta-item">
+            <strong>Instagram</strong>
+            <a href="https://www.instagram.com/burning_beatz_bemas/">@burning_beatz_bemas</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Kontakt</h2>
+        <div class="contact-grid">
+          <article class="contact-item">
+            <strong>Adresse</strong>
+            <span>Laichanger 42, 86554 Poettmes</span>
+          </article>
+          <article class="contact-item">
+            <strong>Email</strong>
+            <a href="mailto:info@feuerwehr-poettmes.de">info@feuerwehr-poettmes.de</a>
+          </article>
+          <article class="contact-item">
+            <strong>Telefon</strong>
+            <span>+49 8253 - 7008</span>
+          </article>
+          <article class="contact-item">
+            <strong>Notfall</strong>
+            <span>112</span>
+          </article>
+        </div>
+      </section>
+
+      <p class="meta">Feuerwehr Poettmes | Aktuelles</p>
+    </main>
+
+    <nav class="tabbar" aria-label="Mobile Navigation">
+      <a href="/">Start</a>
+      <a class="active" href="/aktuelles/">Aktuelles</a>
+      <a href="/150j/">150 Jahre</a>
+      <a href="/impressum/">Impressum</a>
     </nav>
-    <!-- Masthead-->
-    <header class="masthead">
-      <div
-        class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center"
-      >
-        <div class="d-flex justify-content-center">
-          <div class="text-center">
-            <h1 class="mx-auto my-0 text-uppercase">Feuerwehr Pöttmes</h1>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- Next Events -->
-    <section class="contact-section bg-black p-4">
-      <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <svg class="text-primary mb-2" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 448 512" fill="currentColor"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/></svg>
-                <h4 class="text-uppercase m-0">Nächste Übung</h4>
-                <hr class="my-4 mx-auto" />
-                <div class="small" id="ne"></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <svg class="text-primary mb-2" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 448 512" fill="currentColor"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/></svg>
-                <h4 class="text-uppercase m-0">Nächste Jugendübung</h4>
-                <hr class="my-4 mx-auto" />
-                <div class="small" id="nj"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- posts-->
-    <section class="contact-section" style="margin: 0 auto; max-width: 1200px">
-      <div class="container px-4 px-lg-5 justify-content-center text-center">
-        <h1 class="font-weight-bold text-uppercase mb-4">Aktuelles</h1>
-        <a href="https://www.instagram.com/explore/tags/wirfuerpoettmes/"><h2 class="mb-4">#WirFuerPoettmes</h2></a>
-      </div>
-
-      <div
-        class="container px-4 px-lg-5 row justify-content-center"
-        style="margin: 0 auto; max-width: 1200px"
-        id="posts"
-      ></div>
-    </section>
-    <!-- Contact-->
-    <section class="contact-section bg-black">
-      <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <svg class="text-primary mb-2" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 576 512" fill="currentColor"><path d="M408 120c0 54.6-73.1 151.9-105.2 192c-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120C168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6c.5-1.2 1-2.5 1.5-3.7l116-46.4C558.9 123.4 576 135 576 152V422.8c0 9.8-6 18.6-15.1 22.3L416 503V200.4zM137.6 138.3c2.4 14.1 7.2 28.3 12.8 41.5c2.9 6.8 6.1 13.7 9.6 20.6V451.8L32.9 502.7C17.1 509 0 497.4 0 480.4V209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM307.1 471.1c-8.9 8.9-23.1 8.9-32 0C233.3 429.3 160 350 160 280.5V215L307.1 471.1zM288 150a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>
-                <h4 class="text-uppercase m-0">Addresse</h4>
-                <hr class="my-4 mx-auto" />
-                <div class="small">Laichanger 42, 86554 Pöttmes</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <svg class="text-primary mb-2" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 512 512" fill="currentColor"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
-                <h4 class="text-uppercase m-0">Email</h4>
-                <hr class="my-4 mx-auto" />
-                <div class="small">
-                  <a href="mailto:info@feuerwehr-poettmes.de"
-                    >info@feuerwehr-poettmes.de</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <svg class="text-primary mb-2" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 384 512" fill="currentColor"><path d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM144 448c0 8.8 7.2 16 16 16h64c8.8 0 16-7.2 16-16s-7.2-16-16-16H160c-8.8 0-16 7.2-16 16zM304 64H80V384H304V64z"/></svg>
-                <h4 class="text-uppercase m-0">Telefon</h4>
-                <hr class="my-4 mx-auto" />
-                <div class="small">+49 8253 - 7008</div>
-                <div class="small">Notfall: 112</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="social d-flex justify-content-center">
-          <a class="mx-2" href="https://www.instagram.com/feuerwehrpoettmes/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
-          <a class="mx-2" href="https://www.facebook.com/feuerwehr.poettmes/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 320 512" fill="currentColor"><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/></svg></a>
-        </div>
-      </div>
-    </section>
-    <!-- Footer-->
-    <footer class="footer bg-black small text-center text-white-50">
-      <div class="container px-4 px-lg-5">
-        Made with ❤️ by <a href="https://hdr-it.de">hdr-it.de</a> 2023 | With
-        the help of
-        <a href="https://startbootstrap.com/theme/grayscale">Grayscale</a>
-      </div>
-    </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="../js/scripts.js"></script>
-    <script src="../js/posts.js"></script>
     <script src="../js/dates.js"></script>
+    <script src="../js/aktuelles.js"></script>
   </body>
 </html>
