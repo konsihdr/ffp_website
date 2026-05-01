@@ -36,6 +36,10 @@
   --countdown-hint: #ffecb5;
   --ticket-bg: linear-gradient(140deg, #2a1315, #391318);
   --ticket-image-bg: #ffffff;
+  --ticket-card-title: #ffffff;
+  --ticket-card-text: #ffe1da;
+  --ticket-card-pill-bg: rgba(255, 255, 255, 0.2);
+  --ticket-card-pill-text: #ffffff;
   --social-bg: rgba(255, 255, 255, 0.04);
   --modal-bg: rgba(5, 8, 14, 0.92);
   --modal-content-bg: #0b111a;
@@ -286,6 +290,29 @@ video {
   object-fit: cover;
 }
 
+.event-icon {
+  width: 76px;
+  height: 100%;
+  min-height: 96px;
+  display: grid;
+  place-items: center;
+}
+
+.event-icon svg {
+  width: 42px;
+  height: 42px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.ticket-icon {
+  color: var(--ticket-card-title);
+  background: var(--ticket-card-pill-bg);
+}
+
 .event-card-body {
   padding: 10px 10px 10px 0;
 }
@@ -299,6 +326,23 @@ video {
   margin: 0;
   color: var(--text-soft);
   font-size: 0.78rem;
+}
+
+.event-card.ticket-card {
+  background: var(--ticket-bg);
+}
+
+.event-card.ticket-card h3 {
+  color: var(--ticket-card-title);
+}
+
+.event-card.ticket-card p {
+  color: var(--ticket-card-text);
+}
+
+.event-card.ticket-card .pill {
+  background: var(--ticket-card-pill-bg);
+  color: var(--ticket-card-pill-text);
 }
 
 .pill {
@@ -870,6 +914,10 @@ video {
     --countdown-hint: #7a5a13;
     --ticket-bg: linear-gradient(140deg, #ffece7, #ffd9d0);
     --ticket-image-bg: #ffffff;
+    --ticket-card-title: #8e2a1d;
+    --ticket-card-text: #8e2a1d;
+    --ticket-card-pill-bg: rgba(242, 72, 49, 0.2);
+    --ticket-card-pill-text: #8e2a1d;
     --social-bg: rgba(255, 255, 255, 0.7);
     --modal-bg: rgba(20, 34, 56, 0.72);
     --modal-content-bg: #ffffff;
@@ -909,6 +957,16 @@ video {
   .event-card img {
     width: 100%;
     height: 170px;
+  }
+
+  .event-icon {
+    width: 100%;
+    height: 170px;
+  }
+
+  .event-icon svg {
+    width: 58px;
+    height: 58px;
   }
 
   .event-card-body {
