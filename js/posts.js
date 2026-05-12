@@ -107,12 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
    * Fetches posts from the API and renders them as cards in the postsContainer.
    */
   function fetchPosts() {
-    const apiUrl = `https://base.hdr-it.de/api/collections/ffp_posts/records?sort=-postDate&perPage=12`;
-
     // Indicate loading state (optional)
     // postsContainer.innerHTML = '<div class="col-12 text-center"><p>Loading posts...</p></div>';
 
-    fetch(apiUrl)
+    window.ffpSupabase.request("ffp_posts", {
+      select: "alt,caption,url,display_url,media_url,media_type,post_date",
+      order: "post_date.desc",
+      limit: "12",
+    })
       .then((response) => {
         // Check for HTTP errors
         if (!response.ok) {
@@ -126,8 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Clear existing posts/loading indicator
         postsContainer.innerHTML = "";
 
-        // PocketBase returns data in a 'items' array
-        const posts = data.items || [];
+        const posts = data || [];
 
         // Check if there are any posts
         if (posts.length === 0) {
@@ -153,15 +154,15 @@ document.addEventListener("DOMContentLoaded", () => {
           cardDiv.classList.add("card", "h-150");
 
           // Determine media type and URL
-          const isVideo = item.video && item.video.length > 0;
-          const mediaUrl = item.displayUrl || "assets/img/placeholder.png";
+          const isVideo = item.media_type === "video";
+          const mediaUrl = item.display_url || item.media_url || "assets/img/placeholder.png";
           const imageAlt = item.alt || "Post media";
           const postUrl = item.url || "#";
           const fullCaption = item.caption || "No caption available.";
           const potentialTitle = item.caption
             ? item.caption.split(" ")[1]
             : "Untitled Post";
-          const formattedDate = formatISODate(item.postDate);
+          const formattedDate = formatISODate(item.post_date);
           const words = fullCaption.split(" ");
           let truncatedCaption = words.slice(0, 50).join(" ");
           let readMoreLink = "";

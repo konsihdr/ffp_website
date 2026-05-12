@@ -19,9 +19,9 @@
     const card = document.createElement('article');
     card.className = 'post-card';
 
-    const isVideo = item.video && item.video.length > 0;
-    const mediaUrl = item.displayUrl || '/assets/img/placeholder.jpeg';
-    const dateText = formatISODate(item.postDate);
+    const isVideo = item.media_type === 'video';
+    const mediaUrl = item.display_url || item.media_url || '/assets/img/placeholder.jpeg';
+    const dateText = formatISODate(item.post_date);
     const fullCaption = item.caption || 'Kein Text vorhanden.';
     const words = fullCaption.split(' ');
     const shortCaption = words.slice(0, 40).join(' ') + (words.length > 40 ? '...' : '');
@@ -125,11 +125,13 @@
   async function loadPosts() {
     postsContainer.innerHTML = '<article class="post-card"><div class="post-body"><p class="post-text">Lade aktuelle Beitraege ...</p></div></article>';
     try {
-      const apiUrl = 'https://base.hdr-it.de/api/collections/ffp_posts/records?sort=-postDate&perPage=8';
-      const response = await fetch(apiUrl);
+      const response = await window.ffpSupabase.request('ffp_posts', {
+        select: 'caption,url,display_url,media_url,media_type,post_date',
+        order: 'post_date.desc',
+        limit: '8'
+      });
       if (!response.ok) throw new Error('API request failed');
-      const data = await response.json();
-      const posts = data.items || [];
+      const posts = await response.json();
 
       postsContainer.innerHTML = '';
 
