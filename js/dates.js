@@ -1,15 +1,18 @@
 function nextJugend() {
-  const apiUrl = "https://base.hdr-it.de/api/collections/ffp_events/records?filter=(is_youth_event%3Dtrue%20%26%26%20start%3E%3D%40now)&sort=start&perPage=1";
-
   // Element auswählen, in dem das Start Datum angezeigt wird
   const startDatumElement = document.getElementById("nj");
+  if (!startDatumElement) return;
 
   // Fetch-Anfrage an die API senden
-  fetch(apiUrl)
+  window.ffpSupabase.request("ffp_events", {
+    select: "summary,start",
+    is_youth_event: "eq.true",
+    start: `gte.${new Date().toISOString()}`,
+    order: "start.asc",
+    limit: "1",
+  })
     .then((response) => response.json()) // Die Antwort als JSON interpretieren
-    .then((data) => {
-      // PocketBase returns data in a 'items' array
-      const events = data.items || [];
+    .then((events) => {
       if (events.length === 0) {
         startDatumElement.textContent = "Keine anstehenden Jugendveranstaltungen";
         return;
@@ -42,17 +45,19 @@ function nextJugend() {
 nextJugend();
 
 function next() {
-  const apiUrl = "https://base.hdr-it.de/api/collections/ffp_events/records?filter=(start>=@now)&sort=start&perPage=1";
-
   // Element auswählen, in dem das Start Datum angezeigt wird
   const startDatumElement = document.getElementById("ne");
+  if (!startDatumElement) return;
 
   // Fetch-Anfrage an die API senden
-  fetch(apiUrl)
+  window.ffpSupabase.request("ffp_events", {
+    select: "summary,start",
+    start: `gte.${new Date().toISOString()}`,
+    order: "start.asc",
+    limit: "1",
+  })
     .then((response) => response.json()) // Die Antwort als JSON interpretieren
-    .then((data) => {
-      // PocketBase returns data in a 'items' array
-      const events = data.items || [];
+    .then((events) => {
       if (events.length === 0) {
         startDatumElement.textContent = "Keine anstehenden Veranstaltungen";
         return;
