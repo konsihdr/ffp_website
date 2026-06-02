@@ -90,7 +90,7 @@ function next() {
 next();
 
 function updateBBCountdown() {
-  const targetDate = new Date('2026-06-03T00:00:00').getTime();
+  const targetDate = new Date('2026-06-03T20:00:00').getTime();
   const now = new Date().getTime();
   const distance = targetDate - now;
 
