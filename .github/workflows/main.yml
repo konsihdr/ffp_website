@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "Project structure:"
           ls -la
-          echo "Full tree:"
+          echo "File tree:"
           find . -type f
 
       - name: 🔐 Install lftp
@@ -26,7 +26,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y lftp
 
-      - name: 🚀 Upload via SFTP (mirror sync)
+      - name: 🚀 Upload via SFTP (overwrite only, ignore git)
         env:
           HOST: ${{ secrets.FTP_SERVER }}
           USER: ${{ secrets.FTP_USERNAME }}
@@ -40,8 +40,9 @@ jobs:
 
           mirror -R \
             --verbose \
-            --delete \
             --only-newer \
+            --exclude-glob .git* \
+            --exclude-glob .git/** \
             ./ ./
 
           bye
