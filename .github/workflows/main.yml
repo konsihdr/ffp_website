@@ -14,19 +14,17 @@ jobs:
       - name: 🚚 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 📦 Show files (debug)
+      - name: 📦 Debug (only on failure / optional visibility)
         run: |
-          echo "Project structure:"
-          ls -la
-          echo "File tree:"
-          find . -type f
+          echo "Repo structure:"
+          find . -type f | head -200
 
       - name: 🔐 Install lftp
         run: |
           sudo apt-get update
           sudo apt-get install -y lftp
 
-      - name: 🚀 Upload via SFTP (overwrite only, ignore git)
+      - name: 🚀 Deploy to server (SFTP mirror)
         env:
           HOST: ${{ secrets.FTP_SERVER }}
           USER: ${{ secrets.FTP_USERNAME }}
@@ -43,6 +41,8 @@ jobs:
             --only-newer \
             --exclude-glob .git* \
             --exclude-glob .git/** \
+            --exclude-glob .github* \
+            --exclude-glob .github/** \
             ./ ./
 
           bye
