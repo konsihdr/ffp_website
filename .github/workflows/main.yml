@@ -1,27 +1,48 @@
+name: 🚀 Deploy website on push
+
 on:
   push:
     branches:
       - main
 
-name: 🚀 Deploy website on push
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
+    name: 🎉 Deploy via SFTP
     runs-on: ubuntu-latest
+
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
-    
-    - name: 📂 Sync files
-      uses: Dylan700/sftp-upload-action@latest
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        port: 22
-        uploads: |
-            ./ => ./
-        ignore: |
-            *.git
-            */**/*git*
-            *.github
+      - name: 🚚 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Show files (debug)
+        run: |
+          echo "Project structure:"
+          ls -la
+          echo "Full tree:"
+          find . -type f
+
+      - name: 🔐 Install lftp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: 🚀 Upload via SFTP (mirror sync)
+        env:
+          HOST: ${{ secrets.FTP_SERVER }}
+          USER: ${{ secrets.FTP_USERNAME }}
+          PASS: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          lftp -e "
+          set sftp:auto-confirm yes;
+          set ssl:verify-certificate no;
+
+          open sftp://$USER:$PASS@$HOST;
+
+          mirror -R \
+            --verbose \
+            --delete \
+            --only-newer \
+            ./ ./
+
+          bye
+          "
