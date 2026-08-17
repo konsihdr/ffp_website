@@ -26,28 +26,20 @@
     const words = fullCaption.split(' ');
     const shortCaption = words.slice(0, 40).join(' ') + (words.length > 40 ? '...' : '');
     const titleText = words.slice(0, 4).join(' ') || 'Aktueller Beitrag';
-    const postUrl = item.url || '';
+    const detailUrl = `/aktuelles/beitrag/?id=${encodeURIComponent(item.short_code)}`;
 
     card.innerHTML = `
-      ${isVideo
-        ? `<video class="post-media" preload="auto" muted playsinline webkit-playsinline><source src="${mediaUrl}" type="video/mp4"></video>`
-        : `<img class="post-media" src="${mediaUrl}" alt="Post" loading="lazy">`}
+      <a class="post-media-link" href="${detailUrl}" aria-hidden="true" tabindex="-1">
+        ${isVideo
+          ? `<video class="post-media" preload="auto" muted playsinline webkit-playsinline><source src="${mediaUrl}" type="video/mp4"></video>`
+          : `<img class="post-media" src="${mediaUrl}" alt="Post" loading="lazy">`}
+      </a>
       <div class="post-body">
-        <h3 class="post-title">${postUrl ? `<a href="${postUrl}" target="_blank" rel="noopener noreferrer">${titleText}</a>` : titleText}</h3>
+        <h3 class="post-title"><a href="${detailUrl}">${titleText}</a></h3>
         <p class="post-text">${shortCaption}</p>
         ${dateText ? `<div class="post-date">${dateText}</div>` : ''}
       </div>
     `;
-
-    const mediaEl = card.querySelector('.post-media');
-    if (mediaEl) {
-      mediaEl.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        pauseInlineVideos();
-        showLightbox(mediaUrl, isVideo ? 'video' : 'image', fullCaption);
-      });
-    }
 
     if (isVideo) {
       const inlineVideo = card.querySelector('video.post-media');
@@ -62,71 +54,11 @@
     return card;
   }
 
-  function pauseInlineVideos() {
-    document.querySelectorAll('#posts video.post-media').forEach((video) => {
-      video.pause();
-      video.currentTime = 0;
-    });
-  }
-
-  function showLightbox(mediaUrl, mediaType, caption) {
-    const existing = document.getElementById('media-lightbox');
-    if (existing) {
-      const existingVideo = existing.querySelector('video');
-      if (existingVideo) {
-        existingVideo.pause();
-        existingVideo.currentTime = 0;
-      }
-      existing.remove();
-    }
-
-    const lightbox = document.createElement('div');
-    lightbox.id = 'media-lightbox';
-    lightbox.className = 'media-lightbox';
-
-    const mediaMarkup = mediaType === 'video'
-      ? `<video controls autoplay class="lightbox-media"><source src="${mediaUrl}" type="video/mp4"></video>`
-      : `<img src="${mediaUrl}" class="lightbox-media" alt="Post media">`;
-
-    lightbox.innerHTML = `
-      <div class="lightbox-content">
-        <span class="lightbox-close">&times;</span>
-        ${mediaMarkup}
-        ${caption ? `<p class="lightbox-caption">${caption}</p>` : ''}
-      </div>
-    `;
-
-    document.body.appendChild(lightbox);
-
-    const closeLightbox = () => {
-      const lightboxVideo = lightbox.querySelector('video');
-      if (lightboxVideo) {
-        lightboxVideo.pause();
-        lightboxVideo.currentTime = 0;
-      }
-      document.removeEventListener('keydown', escHandler);
-      lightbox.remove();
-    };
-
-    const closeBtn = lightbox.querySelector('.lightbox-close');
-    closeBtn.onclick = closeLightbox;
-    lightbox.onclick = (e) => {
-      if (e.target === lightbox) closeLightbox();
-    };
-
-    const escHandler = (e) => {
-      if (e.key === 'Escape') {
-        closeLightbox();
-      }
-    };
-    document.addEventListener('keydown', escHandler);
-  }
-
   async function loadPosts() {
     postsContainer.innerHTML = '<article class="post-card"><div class="post-body"><p class="post-text">Lade aktuelle Beitraege ...</p></div></article>';
     try {
       const response = await window.ffpSupabase.request('ffp_posts', {
-        select: 'caption,url,display_url,media_url,media_type,post_date',
+        select: 'short_code,caption,url,display_url,media_url,media_type,post_date',
         order: 'post_date.desc',
         limit: '8'
       });
